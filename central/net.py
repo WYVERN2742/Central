@@ -13,14 +13,14 @@ from . import parse
 from . import files
 
 def get_request(url: str) -> requests.Response:
-	"""Request a webpage and return the request. Will return None if the request was invalid."""
+	"""Request a webpage and return the request. Will return `None` if the request was invalid."""
 	url = str(url)
-	uux.show_debug("Downloading '" + url +"'...",end="")
+	uux.show_debug("Downloading '" + url + "'...", end="")
 
 	try:
 		response = requests.get(url)
 		if response.status_code != 200:
-			uux.show_error("\nUnable to download '"+ url+ "': " + str(response.status_code))
+			uux.show_error("\nUnable to download '" + url + "': " + str(response.status_code))
 		else:
 			uux.show_debug("Done!")
 			return response
@@ -63,7 +63,7 @@ def normalize_url(url: str) -> str:
 	return url
 
 def get_soup(url: str) -> bs4.BeautifulSoup:
-	"""Use the url to request a webpage and create a soup for parsing. Returns None if the url response is invalid."""
+	"""Use the url to request a webpage and create a soup for parsing. Returns `None` if the url response is invalid."""
 	url = normalize_url(url)
 	response = get_request(url)
 	if response is None:
@@ -71,7 +71,7 @@ def get_soup(url: str) -> bs4.BeautifulSoup:
 	return bs4.BeautifulSoup(response.text, "html.parser")
 
 def get_soup_cached(url: str) -> bs4.BeautifulSoup:
-	"""Use the url to request a webpage and create a soup for parsing. Returns None if the url response is invalid.
+	"""Use the url to request a webpage and create a soup for parsing. Returns `None` if the url response is invalid.
 
 	Will attempt to retrieve from cache before requesting, and will save
 	any new requests to cache

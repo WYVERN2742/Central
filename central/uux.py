@@ -148,7 +148,7 @@ def show_list_numbered(title: str, texts: list) -> None:
 
 	for i in range(0, len(texts)):
 		item = texts[i]
-		show_info(" "+ Fore.LIGHTMAGENTA_EX + str(i+1) + Fore.LIGHTCYAN_EX +  "> " + str(item))
+		show_info(" " + Fore.LIGHTMAGENTA_EX + str(i+1) + Fore.LIGHTCYAN_EX + "> " + str(item))
 
 def get_int(prompt: str) -> int:
 	""" Gets an integer from the user """
@@ -196,7 +196,7 @@ def select_content(content: list) -> list:
 
 	show_list_numbered("Page Content", previews)
 	index = get_int_in_range("Select Content", 1, len(previews))
-	return index-1
+	return index - 1
 
 def display_page(page: list, wrap: int) -> bool:
 	"""Displays an interactable listadized page"""

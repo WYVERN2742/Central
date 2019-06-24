@@ -48,7 +48,7 @@ def cleanup_text(text: str) -> str:
 	text = text.replace("\n.", ".").replace("...", "…")
 
 	# Add spaces after commas
-	text = text.replace(",",", ").replace(",  ",", ")
+	text = text.replace(",", ", ").replace(",  ", ", ")
 
 	# Specifically for support with uux.display_page(),
 	# move periods into quotation marks
@@ -136,7 +136,7 @@ def story_content(soup: bs4.BeautifulSoup) -> list:
 def get_next_story(url:str) -> str:
 	"""Return the url of the next page in the story."""
 	soup = net.get_soup_cached(url)
-	NEXT_LINKS = [">>","»"]
+	NEXT_LINKS = [">>", "»"]
 
 	all_links = soup.find_all("a")
 	for link in all_links:
