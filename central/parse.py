@@ -76,6 +76,7 @@ def story_content(soup: bs4.BeautifulSoup) -> list:
 		hr.replace_with('\n""---------------""\n')
 
 	threadmarks = soup.find_all(attrs={"class": "hasThreadmark"})
+	threadmarkheaders = soup.find_all(attrs={"class": "message-cell--threadmark-header"})
 	storyText = soup.find_all(attrs={"class" : "storytext"})
 	storyContent = soup.find_all(attrs={"class" : "storycontent"})
 	chapters = soup.find_all(attrs={"id" : "chapters"})
@@ -86,7 +87,14 @@ def story_content(soup: bs4.BeautifulSoup) -> list:
 
 	content = []
 
-	if threadmarks:
+	if threadmarkheaders:
+		# Threadmark headers are in a separate div above the one containing content
+		uux.show_debug("Page has " + str(len(threadmarkheaders)) + " threadmarks headers")
+		for header in threadmarkheaders:
+			text = cleanup_text(header.parent.find(attrs={"class":"bbWrapper"}).text)
+			content.append(text)
+
+	elif threadmarks:
 		uux.show_debug("Page has " + str(len(threadmarks)) + " threadmarks")
 		for mark in threadmarks:
 
