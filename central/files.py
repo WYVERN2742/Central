@@ -59,6 +59,14 @@ def cache_save(item: str, obj: object) -> None:
 	pickle.dump(obj, open(cache, "wb"))
 	uux.show_debug("Cached object to " + cache)
 
+def cache_remove(item: str) -> None:
+	"""Remove an object from the cache with the provided id."""
+	item = str(item)
+	cache = "Cached/" + item
+
+	if os.path.exists(cache):
+		delete_file(cache)
+
 def cache_get_hashed(item: str) -> object:
 	"""Get an object from cache, using a hashed ID. Returns `None` if the object isn't present."""
 	return cache_get(md5(item))
@@ -66,6 +74,10 @@ def cache_get_hashed(item: str) -> object:
 def cache_save_hashed(item: str, obj: object) -> None:
 	"""Save an item to cache, using a hashed ID."""
 	cache_save(md5(item), obj)
+
+def cache_remove_hashed(item: str) -> None:
+	"""Delete an item from the cache, using a hashed ID."""
+	cache_remove(md5(item))
 
 def copy_file(file: str, dest: str) -> None:
 	"""Copy a file from one location to another."""
