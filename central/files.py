@@ -37,7 +37,16 @@ def cache_get(item: str) -> object:
 	# the returned location is guaranteed to exist, so no point checking again.
 
 	if cache is not None:
-		cached = pickle.load(open(cache, "rb"))
+		try:
+			cached = pickle.load(open(cache, "rb"))
+		except EOFError as ex:
+			# Cache file is corrupted, so print an error and act like it does
+			# not exist. We do not delete the cache file incase the user wants
+			# to recover the file.
+			uux.show_error("Error when loading file from cache: " + str(ex))
+			return None
+		except Exception as ex:
+			raise ex
 		uux.show_debug("Cache hit for " + item)
 		return cached
 
