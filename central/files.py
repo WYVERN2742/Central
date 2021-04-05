@@ -15,6 +15,20 @@ import stat
 
 from . import uux
 
+def hashFile(path: str) -> str:
+	""" Get the SHA-1 hash of a file at the given path."""
+	if not os.path.exists(path):
+		raise FileNotFoundError
+
+	hasher = hashlib.sha1()
+	block_sz = 8192
+	with open(path, 'rb') as f:
+		buf = f.read(block_sz)
+		while len(buf) > 0:
+			hasher.update(buf)
+			buf = f.read(block_sz)
+	return str(hasher.hexdigest())
+
 def md5(string: str) -> str:
 	"""Get the md5 hash of the provided string."""
 	return str(hashlib.md5(string.encode()).hexdigest())
