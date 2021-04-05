@@ -11,6 +11,7 @@ import hashlib
 import shutil
 import urllib
 import pathlib
+import stat
 
 from . import uux
 
@@ -128,6 +129,18 @@ def delete_file(file: str) -> None:
 		# Files does not exist
 		return
 
+	os.remove(file)
+
+def delete_file_force(file: str) -> None:
+	"""Delete the provided file. Ignore readonly markers."""
+	uux.show_info("Forcefully Deleting " + file)
+
+	if not os.path.exists(file):
+		# Files does not exist
+		return
+
+	# mark file as writeable. This should allow deleting readonly files.
+	os.chmod(file, stat.S_IWRITE)
 	os.remove(file)
 
 def copy_folder(src: str, dest: str) -> None:
