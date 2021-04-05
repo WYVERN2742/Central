@@ -28,6 +28,10 @@ def cache_find(item: str) -> str:
 
 	return None
 
+def cache_find_hashed(item: str) -> str:
+	"""Return the location of a cached object using a hashed ID. Returns `None` when the cached object is not found."""
+	return cache_find(md5(item))
+
 def cache_get(item: str) -> object:
 	"""Get an object from cache, return `None` if not found."""
 	item = str(item)
