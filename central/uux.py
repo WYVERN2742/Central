@@ -1,4 +1,4 @@
-"""central.uux: Universal User Experience.
+﻿"""central.uux: Universal User Experience.
 
 A simple standardized set of functions for user output and input.
 
@@ -135,6 +135,14 @@ def get_file_existing() -> str:
 		if os.path.isfile(addr):
 			return addr
 		show_warning("File Not Found, please try again")
+
+def get_folder_existing() -> str:
+	""" Gets a valid and existing folder from the user """
+	while True:
+		addr = get_input("Enter Folder")
+		if os.path.isdir(addr):
+			return addr
+		show_warning("Folder Not Found, please try again")
 
 def show_list(title: str, texts: list) -> None:
 	""" Shows a list of items with a title"""
