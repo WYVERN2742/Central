@@ -1,4 +1,4 @@
-﻿"""central.uux: Universal User Experience.
+"""central.uux: Universal User Experience.
 
 A simple standardized set of functions for user output and input.
 
@@ -132,7 +132,7 @@ def get_file_existing() -> str:
 	""" Gets a valid and existing file from the user """
 	while True:
 		addr = get_input("Enter File")
-		if os.path.exists(addr):
+		if os.path.isfile(addr):
 			return addr
 		show_warning("File Not Found, please try again")
 
