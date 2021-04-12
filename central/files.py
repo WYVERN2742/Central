@@ -225,3 +225,11 @@ def download_file_cached(file_url: str, location: str) -> None:
 	# Copy file from cache to location
 	uux.show_debug("Cache hit for " + item)
 	copy_file(local, location)
+
+def folder_exists(path: str) -> bool:
+	""" Return true if a folder at the provided path exists."""
+	return os.path.isdir(path)
+
+def file_exists(path: str) -> bool:
+	""" Return true if a file at the provided path exists."""
+	return os.path.isfile(path)

@@ -7,7 +7,6 @@ info messages, debug messages, error handling
 and just about anything else related to non-task output
 """
 import time
-import os.path
 import traceback
 import bs4
 
@@ -16,6 +15,7 @@ init()
 
 from . import net
 from . import env
+from . import files
 
 UUXDEBUG = True
 """Print debug messages."""
@@ -132,7 +132,7 @@ def get_file_existing() -> str:
 	""" Gets a valid and existing file from the user """
 	while True:
 		addr = get_input("Enter File")
-		if os.path.isfile(addr):
+		if files.is_file(addr):
 			return addr
 		show_warning("File Not Found, please try again")
 
@@ -140,7 +140,7 @@ def get_folder_existing() -> str:
 	""" Gets a valid and existing folder from the user """
 	while True:
 		addr = get_input("Enter Folder")
-		if os.path.isdir(addr):
+		if files.is_folder(addr):
 			return addr
 		show_warning("Folder Not Found, please try again")
 
